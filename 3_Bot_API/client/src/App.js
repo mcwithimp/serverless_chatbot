@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./App.css";
 
-const LAMBDA_POST_CHATS =
-  "https://t6rj6dqwdbzapbzaxfdifpdaeu0tbkwi.lambda-url.ap-northeast-2.on.aws/";
+const LAMBDA_POST_CHATS = "YOUR_LAMBDA_FUNCTION_URL";
 
 function App() {
   const [messages, setMessages] = useState([]);
