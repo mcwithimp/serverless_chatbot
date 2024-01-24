@@ -20,13 +20,13 @@ function App() {
 
   const callApi = async (url, method, body) => {
     try {
-      const response = await fetch(url, {
-        method: method,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(body),
-      });
+      const headers = {
+        "Content-Type": "application/json",
+      };
+      const payload = body
+        ? { method, headers, body: JSON.stringify(body) }
+        : { method, headers };
+      const response = await fetch(url, payload);
       if (!response.ok) {
         setNewMessage(messages);
         console.log("API call failed");
