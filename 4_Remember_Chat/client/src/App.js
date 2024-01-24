@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./App.css";
 
 // 'REACT_APP_' 필수
@@ -18,6 +18,7 @@ function App() {
     callApi(REACT_APP_LAMBDA_GET_CHAT, "GET", null)
       .then((res) => res.json())
       .then((data) => {
+        // id 오름차순으로 정리
         setMessages(data.sort((a, b) => a.id - b.id));
       });
   };
@@ -40,7 +41,7 @@ function App() {
         : { method, headers };
       const response = await fetch(url, payload);
       if (!response.ok) {
-        setNewMessage(messages);
+        setMessages(messages);
         console.log("API call failed");
         console.log(response);
         return;
@@ -48,7 +49,7 @@ function App() {
       return response;
     } catch (error) {
       console.error("API call error:", error);
-      setNewMessage(messages);
+      setMessages(messages);
     }
   };
 

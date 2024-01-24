@@ -4,11 +4,7 @@
     {
       "Sid": "LambdaPost",
       "Effect": "Allow",
-      "Action": [
-        "dynamodb:BatchWriteItem",
-        "dynamodb:PutItem",
-        "dynamodb:Query"
-      ],
+      "Action": ["dynamodb:BatchWriteItem", "dynamodb:PutItem"],
       "Resource": [
         "arn:aws:dynamodb:ap-northeast-2:601277122387:table/chat-messages"
       ]

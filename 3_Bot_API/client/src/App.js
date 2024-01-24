@@ -28,7 +28,7 @@ function App() {
         : { method, headers };
       const response = await fetch(url, payload);
       if (!response.ok) {
-        setNewMessage(messages);
+        setMessages(messages);
         console.log("API call failed");
         console.log(response);
         return;
@@ -36,7 +36,7 @@ function App() {
       return response;
     } catch (error) {
       console.error("API call error:", error);
-      setNewMessage(messages);
+      setMessages(messages);
     }
   };
 
