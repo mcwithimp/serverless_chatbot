@@ -65,20 +65,6 @@ export const handler = async (event, context) => {
   } catch (err) {
     return done(err);
   }
-
-  try {
-    return {
-      statusCode: 200,
-      body: JSON.stringify({
-        id: inputData.id + 1,
-        text: gptResponse,
-        sender: "bot",
-        timestamp: Date.now(),
-      }),
-    };
-  } catch (err) {
-    console.error(err);
-  }
 };
 
 function done(err, res) {
