@@ -1,11 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
-import './App.css'; // Make sure to create a corresponding CSS file
+import React, { useState, useEffect, useRef } from "react";
+import "./App.css";
 
-const LAMBDA_POST_CHATS = 'https://ym4i2ntibtqvekwriroraotwfq0tgkfq.lambda-url.ap-northeast-2.on.aws/'
+const LAMBDA_POST_CHATS =
+  "https://t6rj6dqwdbzapbzaxfdifpdaeu0tbkwi.lambda-url.ap-northeast-2.on.aws/";
 
 function App() {
   const [messages, setMessages] = useState([]);
-  const [newMessage, setNewMessage] = useState('');
+  const [newMessage, setNewMessage] = useState("");
 
   const messagesEndRef = useRef(null);
 
@@ -22,19 +23,19 @@ function App() {
       const response = await fetch(url, {
         method: method,
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(body),
       });
       if (!response.ok) {
         setNewMessage(messages);
-        console.log('API call failed');
+        console.log("API call failed");
         console.log(response);
         return;
       }
       return response;
     } catch (error) {
-      console.error('API call error:', error);
+      console.error("API call error:", error);
       setNewMessage(messages);
     }
   };
@@ -43,17 +44,16 @@ function App() {
     e.preventDefault();
     if (!newMessage) return;
 
-    const message = { id: Date.now(), text: newMessage, sender: 'user' };
+    const message = { text: newMessage, sender: "user" };
     setMessages([...messages, message]);
-    setNewMessage('');
+    setNewMessage("");
 
-    callApi(LAMBDA_POST_CHATS, 'POST', { content: newMessage })
-      .then(res => res.json())
+    callApi(LAMBDA_POST_CHATS, "POST", { content: newMessage })
+      .then((res) => res.json())
       .then((res) => {
-        const parrotResponse = { id: Date.now(), text: res, sender: 'bot' };
-        setMessages(msgs => [...msgs, parrotResponse]);
+        const parrotResponse = { text: res, sender: "bot" };
+        setMessages((msgs) => [...msgs, parrotResponse]);
       });
-
   };
 
   return (
@@ -64,7 +64,7 @@ function App() {
             <p>{msg.text}</p>
           </div>
         ))}
-        <div ref={messagesEndRef} /> { }
+        <div ref={messagesEndRef} /> {}
       </div>
       <form className="message-form" onSubmit={sendMessage}>
         <input
