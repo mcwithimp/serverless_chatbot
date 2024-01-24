@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./App.css";
 
-const LAMBDA_POST_CHATS = "YOUR_LAMBDA_FUNCTION_URL";
+const LAMBDA_POST_MSG =
+  "https://5sfijd7rqpkxfavfite4jln7hy0ctryf.lambda-url.ap-northeast-2.on.aws/";
 
 function App() {
   const [messages, setMessages] = useState([]);
@@ -47,7 +48,7 @@ function App() {
     setMessages([...messages, message]);
     setNewMessage("");
 
-    callApi(LAMBDA_POST_CHATS, "POST", { content: newMessage })
+    callApi(LAMBDA_POST_MSG, "POST", { content: newMessage })
       .then((res) => res.json())
       .then((res) => {
         const parrotResponse = { text: res, sender: "bot" };
