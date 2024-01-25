@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import "./App.css";
 
 // 'REACT_APP_' 필수
-const { REACT_APP_LAMBDA_GET_CHAT, REACT_APP_LAMBDA_POST_CHAT } = process.env;
+const { REACT_APP_LAMBDA_GET_CHAT, REACT_APP_LAMBDA_POST_MSG } = process.env;
 
 function App() {
   const [messages, setMessages] = useState([]);
@@ -66,7 +66,7 @@ function App() {
     setMessages([...messages, message]);
     setNewMessage("");
 
-    callApi(REACT_APP_LAMBDA_POST_CHAT, "POST", message)
+    callApi(REACT_APP_LAMBDA_POST_MSG, "POST", message)
       .then((res) => res.json())
       .then((msg) => {
         setMessages((msgs) => [...msgs, msg]);
